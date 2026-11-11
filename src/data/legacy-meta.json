@@ -1,0 +1,352 @@
+{
+ "home": {
+  "fr": {
+   "title": "Agence Chance | Mariage en France clé en main",
+   "description": "Organisation de mariage en France : Paris, Normandie, châteaux anciens. Mariage multiculturel clé en main. Agence franco-russophone."
+  },
+  "en": {
+   "title": "Agence Chance | Wedding in France - wedding planner",
+   "description": "Agence Chance is a wedding planner in France. Wedding in France for English-French-Russian speaking couples."
+  },
+  "ru": {
+   "title": "Agence Chance | Свадьба во Франции - организация под ключ",
+   "description": "Agence Chance - агенство по организации свадеб в Париже и Нормандии для франко-русскоязычных пар. Свадьба во Франции под ключ."
+  }
+ },
+ "about": {
+  "fr": {
+   "title": "Votre organisateur de mariage en France | Agence Chance",
+   "description": "Tatiana Chance — fondatrice d'Agence Chance. Organisateur de mariage en France pour couples franco-russophones."
+  },
+  "en": {
+   "title": "Your wedding planner in France | Agence Chance",
+   "description": "Tatiana Chance — founder of Agence Chance. Wedding planner in France for English-French-Russian speaking couples."
+  },
+  "ru": {
+   "title": "Ваш организатор свадьбы во Франции | Agence Chance",
+   "description": "Татьяна Chance — основатель Agence Chance. Профессиональный организатор свадьбы во Франции для франко-русскоязычных пар."
+  }
+ },
+ "services": {
+  "fr": {
+   "title": "Tarifs et services | Agence Chance",
+   "description": "Services Agence Chance : organisation de mariage clé en main, coordination du jour J, animateur. Tarifs et formules."
+  },
+  "en": {
+   "title": "Wedding services and prices | Agence Chance",
+   "description": "Wedding planning services in France: full planning, coordination, host, trusted vendors. Agence Chance pricing packages."
+  },
+  "ru": {
+   "title": "Тарифы и свадебные услуги во Франции | Agence Chance",
+   "description": "Услуги Agence Chance: организация свадьбы под ключ, координация дня, ведущий на свадьбу. Полный спектр услуг, тарифы и пакеты."
+  }
+ },
+ "planning": {
+  "fr": {
+   "title": "Organisation de mariage clé en main | Agence Chance",
+   "description": "Organisation de mariage clé en main par l'Agence Chance. Gestion de A à Z pour un jour unique sans stress. L'harmonie parfaite pour votre célébration."
+  },
+  "en": {
+   "title": "Full-service International wedding planning | Agence Chance",
+   "description": "Full-service wedding planning by Agence Chance. We handle everything from venue booking to day-of coordination for a seamless, stress-free celebration."
+  },
+  "ru": {
+   "title": "Полная организация свадьбы | Agence Chance",
+   "description": "Полная организация свадьбы под ключ. Agence Chance возьмет на себя все хлопоты: от поиска площадки до координации дня."
+  }
+ },
+ "coordination": {
+  "fr": {
+   "title": "Coordination du Jour J | Agence Chance",
+   "description": "Coordination professionnelle de mariage par Agence Chance. Exécution parfaite, célébration sans stress. Nous gérons chaque détail de votre jour unique."
+  },
+  "en": {
+   "title": "Day-of wedding coordination | Agence Chance",
+   "description": "Expert wedding day coordination services by Agence Chance. Flawless execution, stress-free celebration. Let us handle every detail of your perfect day."
+  },
+  "ru": {
+   "title": "Координация свадебного дня | Agence Chance",
+   "description": "Профессиональная координация свадебного дня от Agence Chance. Безупречное исполнение, праздник без стресса. Доверьте нам каждую деталь вашего торжества."
+  }
+ },
+ "host": {
+  "fr": {
+   "title": "Tatiana Chance — Animateur de mariage en France",
+   "description": "Maîtres de cérémonie et animateurs de mariage professionnels. L'Agence Chance crée des célébrations uniques et joyeuses pour un jour inoubliable."
+  },
+  "en": {
+   "title": "Tatiana Chance — Wedding Host in France",
+   "description": "Professional wedding hosts from Agence Chance. We create elegant, personalized, and joyful celebrations for your unforgettable big day."
+  },
+  "ru": {
+   "title": "Татьяна Шанс — ведущая свадеб во Франции",
+   "description": "Татьяна Chance - ваш ведущий на свадьбу от Agence Chance. Создаем душевные и веселые праздники с индивидуальным подходом. Ваш идеальный день с профессионалом."
+  }
+ },
+ "vendors": {
+  "fr": {
+   "title": "Prestataires de mariage | Agence Chance",
+   "description": "Prestataires de mariage sélectionnés par Agence Chance. Fleuristes, photographes, traiteurs de confiance et plus. Professionnels de qualité pour votre fête."
+  },
+  "en": {
+   "title": "Wedding vendors | Agence Chance",
+   "description": "Premium wedding vendors curated by Agence Chance. Trusted florists, photographers, caterers, and more. Quality professionals for your perfect celebration."
+  },
+  "ru": {
+   "title": "Свадебные подрядчики | Agence Chance",
+   "description": "Проверенные свадебные подрядчики от Agence Chance. Флористы, фотографы, кейтеринг и многое другое. Качественные специалисты для идеального праздника."
+  }
+ },
+ "proposal": {
+  "fr": {
+   "title": "Demande en mariage à Paris | Agence Chance",
+   "description": "Organisez votre demande en mariage de rêve à Paris avec Agence Chance. Lieux emblématiques, timing parfait, atmosphère magique. Un moment unique et mémorable."
+  },
+  "en": {
+   "title": "Marriage proposal in Paris | Agence Chance",
+   "description": "Romantic marriage proposal in Paris by Agence Chance. Eiffel Tower, Seine river, secret gardens. We create unforgettable engagement moments in the City of Love."
+  },
+  "ru": {
+   "title": "Предложение руки и сердца в Париже | Agence Chance",
+   "description": "Романтическое предложение руки и сердца в Париже от Agence Chance. Эйфелева башня, Сена, секретные сады. Создаём незабываемые моменты в городе любви."
+  }
+ },
+ "forTwo": {
+  "fr": {
+   "title": "Un mariage pour deux à Paris | Agence Chance",
+   "description": "Mariage intimiste à deux à Paris par Agence Chance. Organisation d'élopement, lieux romantiques, coordination parfaite. Dites \"oui\" dans la ville la plus romantique."
+  },
+  "en": {
+   "title": "Wedding for two in Paris | Agence Chance",
+   "description": "Intimate wedding for two in Paris by Agence Chance. Elopement planning, romantic venues, seamless organization. Say \"I do\" in the most romantic city in the world."
+  },
+  "ru": {
+   "title": "Свадьба на двоих в Париже | Agence Chance",
+   "description": "Свадьба на двоих в Париже от Agence Chance. Организация церемонии, романтичные локации, безупречная координация. Скажите \"да\" в самом романтичном городе мира."
+  }
+ },
+ "weekend": {
+  "fr": {
+   "title": "Week-end romantique à Paris | Agence Chance",
+   "description": "Week-end romantique à Paris par Agence Chance. Hôtels de luxe, dîners intimes, expériences sur mesure. Créez des souvenirs inoubliables dans la Ville Lumière."
+  },
+  "en": {
+   "title": "Romantic weekend in Paris | Agence Chance",
+   "description": "Romantic weekend getaways in Paris by Agence Chance. Luxurious hotels, intimate dinners, curated experiences. Create unforgettable memories in the City of Love."
+  },
+  "ru": {
+   "title": "Романтические выходные в Париже | Agence Chance",
+   "description": "Романтические выходные в Париже от Agence Chance. Роскошные отели, интимные ужины, эксклюзивные впечатления. Создайте незабываемые воспоминания в городе любви."
+  }
+ },
+ "anniversary": {
+  "fr": {
+   "title": "Anniversaire de mariage | Agence Chance",
+   "description": "Fêtez votre anniversaire de mariage avec Agence Chance. Cérémonies de renouvellement de vœux, réceptions élégantes, expériences personnalisées et mémorables."
+  },
+  "en": {
+   "title": "Wedding anniversary | Agence Chance",
+   "description": "Wedding anniversary celebrations by Agence Chance. Romantic vow renewals, intimate gatherings, milestone events. Honor your love story with an unforgettable day."
+  },
+  "ru": {
+   "title": "Юбилей свадьбы | Agence Chance",
+   "description": "Юбилей свадьбы от Agence Chance. Романтичное обновление клятв, камерные торжества, знаменательные события. Отметьте вашу историю любви незабываемым днём."
+  }
+ },
+ "venues": {
+  "fr": {
+   "title": "Lieux de mariage en France | Agence Chance",
+   "description": "Lieux de mariage en France. La sélection d’Agence Chance pour les mariages multiculturels et destination weddings en France."
+  },
+  "en": {
+   "title": "Wedding venues in France | Agence Chance",
+   "description": "Wedding venues in France. The Agence Chance selection for multicultural and destination weddings in France."
+  },
+  "ru": {
+   "title": "Свадебные площадки во Франции | Agence Chance",
+   "description": "Свадебные площадки во Франции: выбор Agence Chance для мультикультурных свадеб и destination weddings во Франции."
+  }
+ },
+ "bonnemare": {
+  "fr": {
+   "title": "Lieu de mariage Château de Bonnemare | Agence Chance",
+   "description": "Lieu de mariage Château De Bonnemare. Un authentique château français en Normandie pour des mariages élégants."
+  },
+  "en": {
+   "title": "Wedding venue Château de Bonnemare | Agence Chance",
+   "description": "Wedding venue Château de Bonnemare. An authentic French château in Normandy for elegant destination weddings."
+  },
+  "ru": {
+   "title": "Свадебная площадка Château de Bonnemare | Agence Chance",
+   "description": "Свадебная площадка Château De Bonnemare от Agence Chance. Аутентичное французское шато в Нормандии для элегантных свадеб."
+  }
+ },
+ "bouffemont": {
+  "fr": {
+   "title": "Lieu de mariage Château Bouffémont | Agence Chance",
+   "description": "Lieu de mariage Château Bouffémont. Un château privé près de Paris pour des mariages raffinés et des weekends de mariage exclusifs."
+  },
+  "en": {
+   "title": "Wedding venue Château Bouffémont | Agence Chance",
+   "description": "Wedding venue Château Bouffémont. A private French château near Paris for refined destination weddings and exclusive wedding weekends."
+  },
+  "ru": {
+   "title": "Свадебная площадка Château Bouffémont | Agence Chance",
+   "description": "Свадьбная площадка Château Bouffémont. Частное французское шато рядом с Парижем для изысканных destination weddings и эксклюзивных свадебных выходных."
+  }
+ },
+ "cascade": {
+  "fr": {
+   "title": "Lieu de mariage La Grande Cascade | Agence Chance",
+   "description": "Lieu de mariage La Grande Cascade. Restaurant légendaire au cœur de Paris, idéal pour des mariages intimistes élégants et des expériences gastronomiques d’exception."
+  },
+  "en": {
+   "title": "Wedding venue La Grande Cascade | Agence Chance",
+   "description": "Wedding venue La Grande Cascade. A legendary restaurant in the heart of Paris, perfect for elegant intimate weddings and exceptional gastronomic wedding experiences."
+  },
+  "ru": {
+   "title": "Свадебная площадка La Grande Cascade | Agence Chance",
+   "description": "Свадебная площадка La Grande Cascade. Легендарный ресторан в сердце Парижа для элегантных камерных свадеб и гастрономических wedding experiences."
+  }
+ },
+ "portfolio": {
+  "fr": {
+   "title": "Nos mariages | Agence Chance",
+   "description": "Nos mariages : cérémonies inoubliables en France. Du Paris romantique aux magnifiques châteaux de Normandie. Inspirez-vous des projets réels d'Agence Chance."
+  },
+  "en": {
+   "title": "Our weddings | Agence Chance",
+   "description": "Our weddings: unforgettable ceremonies in France. From romantic Paris to magnificent Normandy châteaux. Get inspired by real Agence Chance projects."
+  },
+  "ru": {
+   "title": "Реализованные свадьбы | Agence Chance",
+   "description": "Наши свадьбы: незабываемые церемонии во Франции. От романтического Парижа до великолепных замков Нормандии. Вдохновитесь реальными проектами Agence Chance."
+  }
+ },
+ "ekaterina": {
+  "fr": {
+   "title": "Mariage de Ekaterina et Christoph | Agence Chance",
+   "description": "Moments inoubliables du mariage de Ekaterina et Christoph, organisé par l'équipe d'Agence Chance."
+  },
+  "en": {
+   "title": "Ekaterina and Christoph's wedding | Agence Chance",
+   "description": "Unforgettable moments from Ekaterina and Christoph's wedding, organized by the Agence Chance team."
+  },
+  "ru": {
+   "title": "Свадьба Екатерины и Кристофа | Agence Chance",
+   "description": "Незабываемые моменты свадьбы Екатерины и Кристофа, организованной командой Agence Chance."
+  }
+ },
+ "maria": {
+  "fr": {
+   "title": "Le mariage de Maria et André | Agence Chance",
+   "description": "Les moments inoubliables du mariage de Maria et André, organisé par l'équipe de l'Agence Chance."
+  },
+  "en": {
+   "title": "Maria and André's wedding | Agence Chance",
+   "description": "Unforgettable moments from Maria and André's wedding, organized by the Agence Chance team."
+  },
+  "ru": {
+   "title": "Свадьба Марии и Андрэ | Agence Chance",
+   "description": "Незабываемые моменты свадьбы Марии и Андрэ, организованной командой Agence Chance."
+  }
+ },
+ "jasmine": {
+  "fr": {
+   "title": "Mariage de Jasmine et Ramil | Agence Chance",
+   "description": "Moments inoubliables du mariage de Jasmine et Ramil, organisé par l'équipe d'Agence Chance."
+  },
+  "en": {
+   "title": "Jasmine and Ramil’s wedding | Agence Chance",
+   "description": "Unforgettable moments from Jasmine and Ramil's wedding, organized by the Agence Chance team."
+  },
+  "ru": {
+   "title": "Свадьба Жасмин и Рамиля | Agence Chance",
+   "description": "Незабываемые моменты свадьбы Жасмин и Рамиля, организованной командой Agence Chance."
+  }
+ },
+ "veronica": {
+  "fr": {
+   "title": "Mariage de Veronika et Mohamed | Agence Chance",
+   "description": "Moments inoubliables du mariage de Veronika et Mohammed, organisé par l'équipe d'Agence Chance."
+  },
+  "en": {
+   "title": "Veronika and Mohamed’s wedding | Agence Chance",
+   "description": "Unforgettable moments from Veronika and Mohammed's wedding, organized by the Agence Chance team."
+  },
+  "ru": {
+   "title": "Свадьба Вероники и Мухамеда | Agence Chance",
+   "description": "Незабываемые моменты свадьбы Вероники и Мухамеда, организованной командой Agence Chance."
+  }
+ },
+ "blog": {
+  "fr": {
+   "title": "Blog mariage en France | Agence Chance",
+   "description": "Articles du blog Agence Chance. Vous trouverez ici toutes les informations relatives au mariage et à son organisation."
+  },
+  "en": {
+   "title": "Wedding in France blog | Agence Chance",
+   "description": "Agence Chance blog articles. Here you'll find all the information related to weddings and their planning."
+  },
+  "ru": {
+   "title": "Блог о свадьбе во Франции | Agence Chance",
+   "description": "Статьи блога Agence Chance. Здесь вы найдете всю информацию, связанную со свадьбой и ее организацией."
+  }
+ },
+ "contacts": {
+  "fr": {
+   "title": "Contact et consultation | Agence Chance",
+   "description": "Contactez l'équipe d'Agence Chance pour toute question concernant l'organisation de votre mariage."
+  },
+  "en": {
+   "title": "Contact us | Agence Chance",
+   "description": "Contact the Agence Chance team with any questions about planning your wedding."
+  },
+  "ru": {
+   "title": "Контакты и консультация | Agence Chance",
+   "description": "Свяжитесь с командой Agence Chance по любому вопросу, связанному с организацией Вашей свадьбы."
+  }
+ },
+ "legal": {
+  "fr": {
+   "title": "Mentions légales | Agence Chance",
+   "description": "Conformément aux dispositions des articles 6-III et 19 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l’économie numérique, dite L.C.E.N., nous"
+  },
+  "en": {
+   "title": "Legal Notice | Agence Chance",
+   "description": "In accordance with the provisions of Articles 6-III and 19 of Law No. 2004-575 of June 21, 2004 on confidence in the digital economy, known as the LCEN, we"
+  },
+  "ru": {
+   "title": "Правовая информация | Agence Chance",
+   "description": "Conformément aux dispositions des articles 6-III et 19 de la Loi n° 2004-575 du 21 juin 2004 pour la Confiance dans l’économie numérique, dite L.C.E.N., nous"
+  }
+ },
+ "privacy": {
+  "fr": {
+   "title": "RGPD | Agence Chance",
+   "description": "Client : tout professionnel ou toute personne physique capable au sens des articles 1123 et suivants du Code civil, ou toute personne morale, qui consulte le Site faisant l'objet des"
+  },
+  "en": {
+   "title": "GDPR | Agence Chance",
+   "description": "Client: any professional or natural person capable within the meaning of Articles 1123 et seq. of the Civil Code, or legal person, who visits the Site subject to"
+  },
+  "ru": {
+   "title": "Политика конфиденциальности (RGPD) | Agence Chance",
+   "description": "Client : tout professionnel ou personne physique capable au sens des articles 1123 et suivants du Code civil, ou personne morale, qui visite le Site objet des"
+  }
+ },
+ "cookies": {
+  "fr": {
+   "title": "Gestion des cookies | Agence Chance",
+   "description": "Lorsque vous vous connectez à notre site Internet, AGENCE CHANCE peut installer différents cookies sur votre terminal. Certains cookies sont soumis à votre"
+  },
+  "en": {
+   "title": "Cookie Management | Agence Chance",
+   "description": "When you log in to our website, AGENCE CHANCE may install different cookies on your device. Some cookies are subject to your"
+  },
+  "ru": {
+   "title": "Управление cookies | Agence Chance",
+   "description": "Lors de votre connexion à notre site Internet, AGENCE CHANCE peut installer différents cookies sur votre terminal. Certains cookies sont soumis à votre"
+  }
+ }
+}

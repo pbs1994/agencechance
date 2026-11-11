@@ -1,0 +1,52 @@
+---
+import { reviews } from '../data/reviews';
+import type { Lang } from '../i18n';
+interface Props { lang: Lang; eyebrow?: string; title?: string }
+const { lang, eyebrow, title } = Astro.props;
+const t = {
+  fr: { eyebrow: 'Avis Google', title: 'Ils nous ont confié <em>leur jour</em>', prev: 'Précédent', next: 'Suivant', all: 'Tous les avis sur Google' },
+  en: { eyebrow: 'Google reviews', title: 'They trusted us with <em>their day</em>', prev: 'Previous', next: 'Next', all: 'All reviews on Google' },
+  ru: { eyebrow: 'Отзывы Google', title: 'Нам доверили <em>свой день</em>', prev: 'Назад', next: 'Вперёд', all: 'Все отзывы в Google' },
+}[lang];
+---
+<section class="section section--sand rv" data-slider>
+  <div class="wrap">
+    <header class="rv__head reveal">
+      <div>
+        <p class="eyebrow eyebrow--rule">{eyebrow ?? t.eyebrow}</p>
+        <h2 class="h2" set:html={title ?? t.title} />
+      </div>
+      <div class="rv__nav">
+        <button type="button" data-prev aria-label={t.prev}>←</button>
+        <button type="button" data-next aria-label={t.next}>→</button>
+      </div>
+    </header>
+    <ul class="rv__track" data-track>
+      {reviews.map((r) => (
+        <li class="rv__item">
+          <span class="rv__src">Google</span>
+          <blockquote lang={r.lang}>
+            <p>« {r.text} »</p>
+          </blockquote>
+          <p class="rv__who">{r.name}<span>{r.role[lang]}</span></p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .rv__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-bottom: 4rem; }
+  .rv__nav { display: flex; gap: 0.6rem; }
+  .rv__nav button { width: 3.4rem; height: 3.4rem; border: 1px solid var(--ink); background: none; cursor: pointer; font-size: 1rem; transition: background .4s var(--ease), color .4s var(--ease); }
+  .rv__nav button:hover { background: var(--ink); color: var(--paper); }
+  .rv__track { list-style: none; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(20rem, calc((100% - 4rem) / 3)); gap: 2rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 0.5rem; }
+  .rv__track::-webkit-scrollbar { display: none; }
+  .rv__item { scroll-snap-align: start; display: flex; flex-direction: column; padding: 2.6rem 2.2rem; background: var(--paper); }
+  .rv__src { color: var(--plum); letter-spacing: 0.3em; font-size: 0.62rem; text-transform: uppercase; }
+  .rv__item blockquote { margin: 1.6rem 0 2rem; flex: 1; }
+  .rv__item blockquote p { font-family: var(--font-display); font-size: 1.3rem; line-height: 1.5; }
+  .rv__who { margin: 0; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; }
+  .rv__who span { display: block; margin-top: 0.3rem; letter-spacing: 0.08em; text-transform: none; color: var(--stone); font-size: 0.78rem; }
+  @media (max-width: 760px) { .rv__track { grid-auto-columns: 85%; } .rv__head { flex-direction: column; align-items: flex-start; } }
+</style>

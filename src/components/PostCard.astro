@@ -1,0 +1,21 @@
+---
+import Img from './Img.astro';
+import { postUrl, type Post } from '../lib/blog';
+import { UI, type Lang } from '../i18n';
+interface Props { post: Post; lang: Lang }
+const { post, lang } = Astro.props;
+const date = new Date(post.data.date).toLocaleDateString({ fr: 'fr-FR', en: 'en-GB', ru: 'ru-RU' }[lang], { month: 'long', year: 'numeric' });
+---
+<a class="pc" href={postUrl(post)}>
+  <div class="media media--zoom ratio-portrait">
+    {post.data.cover && <Img base={post.data.cover} alt={post.data.title} sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw" />}
+  </div>
+  <p class="pc__date">{date}</p>
+  <h3 class="h3 pc__title">{post.data.title}</h3>
+  <span class="link-arrow">{UI.cta[lang].read}</span>
+</a>
+<style>
+  .pc { display: block; }
+  .pc__date { margin: 1.4rem 0 0.6rem; font-size: 0.64rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--stone); }
+  .pc__title { font-size: 1.45rem; line-height: 1.25; margin-bottom: 1.1rem; }
+</style>

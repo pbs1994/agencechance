@@ -1,0 +1,698 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/fr/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(fr|en|ru)/blog/:y(\\d{4})/:rest*",
+      "destination": "/:lang/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(fr|en|ru)/blog/page/:n",
+      "destination": "/:lang/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/ru/about-us/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/info/byudzhet-svadby-vo-francii",
+      "destination": "/ru/blog/info/byudzhet-svadby-vo-francii/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/info/francuzskie-svadebnye-tradicii",
+      "destination": "/ru/blog/info/francuzskie-svadebnye-tradicii/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/info/godovschiny-svadeb",
+      "destination": "/ru/blog/info/godovschiny-svadeb/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/info/mariage-franco-russe",
+      "destination": "/ru/blog/info/mariage-franco-russe/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/info/svadba-v-normandii",
+      "destination": "/ru/blog/info/svadba-v-normandii/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/info/svadba-v-parizhe",
+      "destination": "/ru/blog/info/svadba-v-parizhe/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/info/svadebnye-platya",
+      "destination": "/ru/blog/info/svadebnye-platya/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/info/svadebnye-pricheski",
+      "destination": "/ru/blog/info/svadebnye-pricheski/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/info/svadebnyj-fotograf",
+      "destination": "/ru/blog/info/svadebnyj-fotograf/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/info/svidetel-na-svadbe",
+      "destination": "/ru/blog/info/svidetel-na-svadbe/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/info/tajming-svadebnogo-dnya",
+      "destination": "/ru/blog/info/tajming-svadebnogo-dnya/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/info/vedushchij-na-svadbu",
+      "destination": "/ru/blog/info/vedushchij-na-svadbu/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/info/zachem-nuzhen-organizator-svadby",
+      "destination": "/ru/blog/info/zachem-nuzhen-organizator-svadby/",
+      "permanent": true
+    },
+    {
+      "source": "/contacts",
+      "destination": "/ru/contacts/",
+      "permanent": true
+    },
+    {
+      "source": "/cookies",
+      "destination": "/ru/cookies/",
+      "permanent": true
+    },
+    {
+      "source": "/en/about",
+      "destination": "/en/about-us/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2025/04/09",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2025/04/23",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2025/05/06",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2025/05/14",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2025/05/21",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2025/05/27",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2025/06/19",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2025/07/15",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2025/08/14",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2025/09/10",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2025/11/23",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2025/11/25",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2025/12/03",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2025/12/08",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2026/02/05",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2026/07/09",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2026/08/06",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2026/09/28",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/2026/10/29",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/info/godovschiny-svadeb",
+      "destination": "/en/blog/information/wedding-anniversaries/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/info/zachem-nuzhen-organizator-svadby",
+      "destination": "/en/blog/information/why-is-a-wedding-planner-needed/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/information/wedding-host-2",
+      "destination": "/en/blog/information/wedding-host-guide/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/page/2",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/blog/page/3",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/chance-agency-copy",
+      "destination": "/en/wedding-venues-france/",
+      "permanent": true
+    },
+    {
+      "source": "/en/information",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/information/page/2",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/information/page/3",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/leading",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/webinar",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/wedding-venues-france/chateau-bouffemont-wedding",
+      "destination": "/en/wedding-venues-france/chateau-bouffemont/",
+      "permanent": true
+    },
+    {
+      "source": "/en/wedding-venues-france/chateau-de-bonnemare-wedding",
+      "destination": "/en/wedding-venues-france/chateau-de-bonnemare/",
+      "permanent": true
+    },
+    {
+      "source": "/en/wedding-venues-france/la-grande-cascade-paris-wedding-diner",
+      "destination": "/en/wedding-venues-france/the-great-waterfall/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/about",
+      "destination": "/fr/a-propos-de-nous/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/agence-chance-copy",
+      "destination": "/fr/lieux-de-mariage-en-france/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2025/04/09",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2025/04/23",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2025/05/06",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2025/05/14",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2025/05/21",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2025/05/27",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2025/06/19",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2025/07/15",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2025/08/14",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2025/09/10",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2025/11/23",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2025/11/25",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2025/12/03",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2025/12/08",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2026/02/05",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2026/07/09",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2026/08/06",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2026/09/28",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/2026/10/29",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/info/en-route-pour-le-mariage",
+      "destination": "/fr/blog/info/animateur-de-mariage-franco-russe/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/info/godovschiny-svadeb",
+      "destination": "/fr/blog/info/anniversaires-de-mariage/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/info/wedding-cake-france",
+      "destination": "/fr/blog/info/gateau-de-mariage-france/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/info/zachem-nuzhen-organizator-svadby",
+      "destination": "/fr/blog/info/pourquoi-faire-appel-a-un-organisateur-de-mariage/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/page/2",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/blog/page/3",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/full-wedding-planning",
+      "destination": "/fr/organisation-complete-dun-mariage/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/info",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/info/page/2",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/info/page/3",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/leading",
+      "destination": "/fr/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/lieux-de-mariage-en-france/chateau-bouffemont-wedding",
+      "destination": "/fr/lieux-de-mariage-en-france/chateau-de-bouffemont/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/lieux-de-mariage-en-france/chateau-de-bonnemare-wedding",
+      "destination": "/fr/lieux-de-mariage-en-france/chateau-de-bonnemare/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/lieux-de-mariage-en-france/la-grande-cascade-paris-wedding-diner",
+      "destination": "/fr/lieux-de-mariage-en-france/la-grande-cascade/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/webinaire",
+      "destination": "/fr/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/wedding-host",
+      "destination": "/fr/animateur-de-mariage/",
+      "permanent": true
+    },
+    {
+      "source": "/full-wedding-planning",
+      "destination": "/ru/full-wedding-planning/",
+      "permanent": true
+    },
+    {
+      "source": "/leading",
+      "destination": "/ru/",
+      "permanent": true
+    },
+    {
+      "source": "/mentions-legales",
+      "destination": "/ru/mentions-legales/",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio",
+      "destination": "/ru/portfolio/",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio/ekaterina-and-christoph",
+      "destination": "/ru/portfolio/ekaterina-and-christoph/",
+      "permanent": true
+    },
+    {
+      "source": "/proposal-in-paris",
+      "destination": "/ru/proposal-in-paris/",
+      "permanent": true
+    },
+    {
+      "source": "/rgpd",
+      "destination": "/ru/rgpd/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/agence-chance-copy",
+      "destination": "/ru/wedding-venues-france/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2025/04/09",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2025/04/23",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2025/05/06",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2025/05/14",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2025/05/21",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2025/05/27",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2025/06/19",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2025/07/15",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2025/08/14",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2025/09/10",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2025/11/23",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2025/11/25",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2025/12/03",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2025/12/08",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2026/02/05",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2026/07/09",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2026/08/06",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2026/09/28",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/2026/10/29",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/page/2",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/blog/page/3",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/info",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/info/page/2",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/info/page/3",
+      "destination": "/ru/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/ru/webinar",
+      "destination": "/ru/",
+      "permanent": true
+    },
+    {
+      "source": "/services",
+      "destination": "/ru/services/",
+      "permanent": true
+    },
+    {
+      "source": "/wedding-host",
+      "destination": "/ru/wedding-host/",
+      "permanent": true
+    },
+    {
+      "source": "/wedding-vendors",
+      "destination": "/ru/wedding-vendors/",
+      "permanent": true
+    },
+    {
+      "source": "/wedding-venues-france",
+      "destination": "/ru/wedding-venues-france/",
+      "permanent": true
+    },
+    {
+      "source": "/wedding-venues-france/chateau-bouffemont-wedding",
+      "destination": "/ru/wedding-venues-france/chateau-bouffemont/",
+      "permanent": true
+    },
+    {
+      "source": "/wedding-venues-france/chateau-de-bonnemare-wedding",
+      "destination": "/ru/wedding-venues-france/chateau-de-bonnemare/",
+      "permanent": true
+    },
+    {
+      "source": "/wedding-venues-france/la-grande-cascade-paris-wedding-diner",
+      "destination": "/ru/wedding-venues-france/la-grande-cascade/",
+      "permanent": true
+    },
+    {
+      "source": "/weekend-paris",
+      "destination": "/ru/weekend-paris/",
+      "permanent": true
+    }
+  ],
+  "headers": [
+    {
+      "source": "/media/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/video/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex"
+        }
+      ]
+    }
+  ]
+}

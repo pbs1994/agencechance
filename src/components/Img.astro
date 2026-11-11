@@ -1,0 +1,27 @@
+---
+import { getMedia, srcset, src } from '../lib/media';
+interface Props {
+  base: string;
+  alt?: string;
+  sizes?: string;
+  eager?: boolean;
+  class?: string;
+  position?: string;
+}
+const { base, alt = '', sizes = '100vw', eager = false, class: cls, position } = Astro.props;
+const m = getMedia(base);
+const h = Math.round((m.h / m.w) * Math.min(m.w, 1920));
+---
+<img
+  src={src(base, 1280)}
+  srcset={srcset(base)}
+  sizes={sizes}
+  width={Math.min(m.w, 1920)}
+  height={h}
+  alt={alt}
+  loading={eager ? 'eager' : 'lazy'}
+  fetchpriority={eager ? 'high' : undefined}
+  decoding="async"
+  class={cls}
+  style={position ? `object-position:${position}` : undefined}
+/>

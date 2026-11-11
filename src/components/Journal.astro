@@ -1,0 +1,28 @@
+---
+import PostCard from './PostCard.astro';
+import { ROUTES, UI, type Lang } from '../i18n';
+import type { Post } from '../lib/blog';
+interface Props { lang: Lang; posts: Post[] }
+const { lang, posts } = Astro.props;
+const title = { fr: 'Le <em>journal</em>', en: 'The <em>journal</em>', ru: '<em>Журнал</em>' }[lang];
+---
+<section class="section">
+  <div class="wrap">
+    <header class="jr__head reveal">
+      <div>
+        <p class="eyebrow eyebrow--rule">{UI.blog[lang].title}</p>
+        <h2 class="h2" set:html={title} />
+      </div>
+      <a class="link-arrow" href={ROUTES.blog[lang]}>{UI.cta[lang].all}</a>
+    </header>
+    <ul class="jr">
+      {posts.map((p) => <li class="reveal"><PostCard post={p} lang={lang} /></li>)}
+    </ul>
+  </div>
+</section>
+<style>
+  .jr__head { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; margin-bottom: 4rem; flex-wrap: wrap; }
+  .jr { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  .jr li:nth-child(2) { margin-top: 4rem; }
+  @media (max-width: 860px) { .jr { grid-template-columns: 1fr; } .jr li:nth-child(2) { margin-top: 0; } }
+</style>

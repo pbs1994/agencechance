@@ -1,0 +1,30 @@
+---
+import { ROUTES, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const t = {
+  fr: { text: 'Nous utilisons des cookies de mesure d’audience et publicitaires (Google) pour améliorer le site. Vous pouvez les accepter ou les refuser.', accept: 'Accepter', refuse: 'Refuser', more: 'En savoir plus' },
+  en: { text: 'We use analytics and advertising cookies (Google) to improve this site. You can accept or refuse them.', accept: 'Accept', refuse: 'Refuse', more: 'Learn more' },
+  ru: { text: 'Мы используем аналитические и рекламные cookies (Google), чтобы улучшать сайт. Вы можете принять или отклонить их.', accept: 'Принять', refuse: 'Отклонить', more: 'Подробнее' },
+}[lang];
+---
+<div class="consent" role="dialog" aria-live="polite" aria-label="Cookies" hidden data-consent>
+  <p>{t.text} <a href={ROUTES.cookies[lang]}>{t.more}</a></p>
+  <div class="consent__actions">
+    <button type="button" class="btn btn--dark" data-consent-choice="denied">{t.refuse}</button>
+    <button type="button" class="btn btn--plum" data-consent-choice="granted">{t.accept}</button>
+  </div>
+</div>
+
+<style>
+  .consent {
+    position: fixed; z-index: 150; right: 1.25rem; bottom: 1.25rem;
+    width: min(26rem, calc(100% - 2.5rem));
+    padding: 1.6rem 1.7rem;
+    background: var(--paper); border: 1px solid var(--hairline);
+    font-size: 0.8rem; line-height: 1.6;
+  }
+  .consent a { text-decoration: underline; text-underline-offset: 3px; }
+  .consent__actions { display: flex; gap: 0.8rem; margin-top: 1.2rem; }
+  .consent__actions .btn { flex: 1; padding: 1em 1.2em; }
+</style>

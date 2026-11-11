@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+.DS_Store
+# Secrets for the PHP form handler live only on the server
+public/api/config.php

@@ -1,0 +1,221 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Blocks from '../components/Blocks.astro';
+import Journal from '../components/Journal.astro';
+import PostCard from '../components/PostCard.astro';
+import Img from '../components/Img.astro';
+import { LANGS, ROUTES, UI, type Lang, type RouteKey } from '../i18n';
+import { PAGES } from '../data/pages';
+import legacyMeta from '../data/legacy-meta.json';
+import { postLang, postUrl, postsFor, postAlternates, readingTime, type Post } from '../lib/blog';
+import { src } from '../lib/media';
+import { orgSchema, breadcrumb } from '../lib/schema';
+
+export async function getStaticPaths() {
+  const paths: { params: { path: string }; props: Record<string, unknown> }[] = [];
+  const strip = (p: string) => p.replace(/^\/|\/$/g, '');
+
+  for (const key of Object.keys(PAGES) as RouteKey[]) {
+    for (const lang of LANGS) paths.push({ params: { path: strip(ROUTES[key][lang]) }, props: { kind: 'page', key, lang } });
+  }
+  for (const lang of LANGS) paths.push({ params: { path: strip(ROUTES.blog[lang]) }, props: { kind: 'blog', key: 'blog', lang } });
+
+  const posts = await getCollection('blog');
+  for (const post of posts) paths.push({ params: { path: strip(postUrl(post)) }, props: { kind: 'post', post, lang: postLang(post) } });
+
+  const legal = await getCollection('legal');
+  const legalKey: Record<string, RouteKey> = { 'mentions-legales': 'legal', rgpd: 'privacy', cookies: 'cookies' };
+  for (const doc of legal) {
+    const lang = doc.id.split('/')[0] as Lang;
+    const key = legalKey[doc.data.key];
+    paths.push({ params: { path: strip(ROUTES[key][lang]) }, props: { kind: 'legal', key, lang, doc } });
+  }
+  return paths;
+}
+
+const { kind, key, lang, post, doc } = Astro.props as {
+  kind: 'page' | 'blog' | 'post' | 'legal';
+  key?: RouteKey;
+  lang: Lang;
+  post?: Post;
+  doc?: Awaited<ReturnType<typeof getCollection<'legal'>>>[number];
+};
+
+const meta = key ? (legacyMeta as Record<string, Record<Lang, { title: string; description: string }>>)[key]?.[lang] : undefined;
+const alternatesFor = (k: RouteKey) => ROUTES[k];
+const t = UI.blog[lang];
+const homeLabel = 'Agence Chance';
+const fmtDate = (d: string) => new Date(d).toLocaleDateString({ fr: 'fr-FR', en: 'en-GB', ru: 'ru-RU' }[lang], { day: 'numeric', month: 'long', year: 'numeric' });
+
+// ---- page
+const page = kind === 'page' && key ? PAGES[key]! : undefined;
+let blocks = page ? page.blocks(lang) : [];
+let blocksAfter: typeof blocks = [];
+if (key === 'home') {
+  const i = blocks.findIndex((b) => b.t === 'cta');
+  blocksAfter = blocks.slice(i);
+  blocks = blocks.slice(0, i);
+}
+const latest = key === 'home' || kind === 'blog' ? await postsFor(lang) : [];
+
+// ---- post
+let Content: Awaited<ReturnType<typeof render>>['Content'] | undefined;
+let postAlts: Partial<Record<Lang, string>> = {};
+let related: Post[] = [];
+let minutes = 0;
+if (kind === 'post' && post) {
+  ({ Content } = await render(post));
+  postAlts = await postAlternates(post.data.key);
+  const same = await postsFor(lang);
+  related = same.filter((p) => p.id !== post.id).slice(0, 3);
+  minutes = readingTime(post.body);
+}
+let LegalContent: typeof Content;
+if (kind === 'legal' && doc) ({ Content: LegalContent } = await render(doc));
+
+const pageName = (k: RouteKey) => (legacyMeta as any)[k]?.[lang]?.title?.replace(/\s*\|\s*Agence Chance$/, '') ?? k;
+const schema =
+  key === 'home'
+    ? [orgSchema(lang)]
+    : kind === 'post' && post
+      ? [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: post.data.title,
+            description: post.data.description,
+            datePublished: post.data.date,
+            dateModified: post.data.updated || post.data.date,
+            inLanguage: lang,
+            image: post.data.cover ? Astro.site!.origin + src(post.data.cover, 1280) : undefined,
+            author: { '@type': 'Person', name: 'Tatiana Chance', url: Astro.site!.origin + ROUTES.about[lang] },
+            publisher: { '@type': 'Organization', name: 'Agence Chance', logo: { '@type': 'ImageObject', url: Astro.site!.origin + '/icon-192.png' } },
+            mainEntityOfPage: Astro.site!.origin + postUrl(post),
+          },
+          breadcrumb([[homeLabel, ROUTES.home[lang]], [t.title, ROUTES.blog[lang]], [post.data.title, postUrl(post)]]),
+        ]
+      : key
+        ? [breadcrumb([[homeLabel, ROUTES.home[lang]], [pageName(key), ROUTES[key][lang]]])]
+        : [];
+---
+{kind === 'page' && page && meta && (
+  <Base lang={lang} title={meta.title} description={meta.description} alternates={alternatesFor(key!)} overHero schema={schema} image={page.hero.image ? src(page.hero.image, 1280) : undefined}>
+    <Hero
+      video={page.hero.video}
+      image={page.hero.image}
+      position={page.hero.position}
+      size={page.hero.size ?? 'full'}
+      eyebrow={page.hero[lang].eyebrow}
+      title={page.hero[lang].title}
+      lead={page.hero[lang].lead}
+      cta={page.hero[lang].cta}
+      cta2={page.hero[lang].cta2}
+      scrollLabel={key === 'home' ? ({ fr: 'Découvrir', en: 'Scroll', ru: 'Листайте' })[lang] : undefined}
+    />
+    <Blocks blocks={blocks} lang={lang} />
+    {key === 'home' && <Journal lang={lang} posts={latest.slice(0, 3)} />}
+    {blocksAfter.length > 0 && <Blocks blocks={blocksAfter} lang={lang} />}
+  </Base>
+)}
+
+{kind === 'blog' && meta && (
+  <Base lang={lang} title={meta.title} description={meta.description} alternates={ROUTES.blog} overHero schema={schema}>
+    <Hero image="202510-1h2a1402-retouched" size="tall" eyebrow={t.title} title={({ fr: 'Le <em>journal</em>', en: 'The <em>journal</em>', ru: '<em>Журнал</em>' })[lang]} lead={t.lead} />
+    <section class="section">
+      <div class="wrap">
+        {latest[0] && (
+          <a class="feature" href={postUrl(latest[0])}>
+            <div class="media media--zoom ratio-land">{latest[0].data.cover && <Img base={latest[0].data.cover} alt={latest[0].data.title} sizes="(max-width: 860px) 100vw, 60vw" />}</div>
+            <div class="feature__text">
+              <p class="eyebrow">{fmtDate(latest[0].data.date)}</p>
+              <h2 class="h2">{latest[0].data.title}</h2>
+              <p class="muted">{latest[0].data.description}</p>
+              <span class="link-arrow">{UI.cta[lang].read}</span>
+            </div>
+          </a>
+        )}
+        <ul class="posts">
+          {latest.slice(1).map((p) => <li class="reveal"><PostCard post={p} lang={lang} /></li>)}
+        </ul>
+      </div>
+    </section>
+  </Base>
+)}
+
+{kind === 'post' && post && Content && (
+  <Base lang={lang} title={post.data.metaTitle} description={post.data.description} alternates={postAlts} overHero type="article" schema={schema} image={post.data.cover ? src(post.data.cover, 1280) : undefined}>
+    <article>
+      <header class="post-hero on-dark">
+        {post.data.cover && <div class="post-hero__media"><Img base={post.data.cover} eager alt="" /></div>}
+        <div class="post-hero__veil"></div>
+        <div class="wrap wrap--text post-hero__text">
+          <p class="eyebrow eyebrow--rule"><a href={ROUTES.blog[lang]}>{t.title}</a> · {fmtDate(post.data.date)} · {minutes} {t.minutes}</p>
+          <h1 class="h1">{post.data.title}</h1>
+        </div>
+      </header>
+      <div class="section">
+        <div class="wrap wrap--text">
+          <p class="lede post-lede">{post.data.description}</p>
+          <div class="prose"><Content /></div>
+          {post.data.updated && post.data.updated !== post.data.date && <p class="muted small post-updated">{t.updated} {fmtDate(post.data.updated)}</p>}
+          <aside class="post-author">
+            <img src={src('202605-tatiana-chance-wedding-planner-in-france', 640)} alt="Tatiana Chance" width="80" height="80" loading="lazy" />
+            <div>
+              <p class="post-author__name">Tatiana Chance</p>
+              <p class="muted small">{({ fr: 'Fondatrice d’Agence Chance, wedding planner trilingue à Paris.', en: 'Founder of Agence Chance, trilingual wedding planner in Paris.', ru: 'Основательница Agence Chance, организатор свадеб в Париже на трёх языках.' })[lang]}</p>
+              <a class="link-arrow" href={ROUTES.contacts[lang]}>{UI.cta[lang].book}</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </article>
+    <section class="section section--ivory">
+      <div class="wrap">
+        <p class="eyebrow eyebrow--rule">{t.related}</p>
+        <ul class="posts posts--three">
+          {related.map((p) => <li class="reveal"><PostCard post={p} lang={lang} /></li>)}
+        </ul>
+      </div>
+    </section>
+  </Base>
+)}
+
+{kind === 'legal' && doc && LegalContent && meta && (
+  <Base lang={lang} title={meta.title} description={meta.description} alternates={alternatesFor(key!)} schema={schema} noindex>
+    <section class="section legal">
+      <div class="wrap wrap--text">
+        <p class="eyebrow eyebrow--rule">Agence Chance</p>
+        <h1 class="h1">{doc.data.title}</h1>
+        <div class="prose"><LegalContent /></div>
+      </div>
+    </section>
+  </Base>
+)}
+
+<style>
+  .feature { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(2rem, 6vw, 6rem); align-items: center; margin-bottom: clamp(4rem, 8vw, 7rem); }
+  .feature__text .h2 { margin-bottom: 1.4rem; }
+  .feature__text .link-arrow { margin-top: 1.6rem; }
+  .posts { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem 2.5rem; }
+  .posts--three { margin-top: 1rem; }
+  @media (max-width: 960px) { .posts { grid-template-columns: 1fr 1fr; } .feature { grid-template-columns: 1fr; } }
+  @media (max-width: 600px) { .posts { grid-template-columns: 1fr; } }
+
+  .post-hero { position: relative; min-height: 78vh; min-height: 78svh; display: flex; align-items: flex-end; color: var(--paper); background: var(--ink); overflow: hidden; }
+  .post-hero__media { position: absolute; inset: 0; }
+  .post-hero__media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .post-hero__veil { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,14,18,.35), rgba(20,14,18,.1) 40%, rgba(20,14,18,.7)); }
+  .post-hero__text { position: relative; padding-top: 9rem; padding-bottom: 4.5rem; }
+  .post-hero .eyebrow { color: rgba(255,255,255,.85); }
+  .post-hero .h1 { font-size: clamp(2.2rem, 4.6vw, 4rem); }
+  .post-lede { margin-bottom: 3rem; padding-bottom: 3rem; border-bottom: 1px solid var(--hairline); }
+  .post-updated { margin-top: 3rem; }
+  .post-author { display: flex; gap: 1.6rem; align-items: flex-start; margin-top: 4rem; padding: 2.4rem; background: var(--ivory); }
+  .post-author img { width: 80px; height: 80px; object-fit: cover; border-radius: 50%; flex: none; }
+  .post-author__name { font-family: var(--font-display); font-size: 1.4rem; margin: 0 0 0.3rem; }
+  .post-author .link-arrow { margin-top: 1rem; }
+  .legal { padding-top: calc(var(--space) * 0.6 + 5rem); }
+  .legal .h1 { margin-bottom: 3rem; }
+</style>

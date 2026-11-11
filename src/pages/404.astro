@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import { ROUTES } from '../i18n';
+---
+<Base lang="fr" title="Page introuvable" description="Cette page n’existe pas ou a été déplacée." alternates={{}} noindex>
+  <section class="section nf">
+    <div class="wrap wrap--text center">
+      <span class="ornament" aria-hidden="true"></span>
+      <p class="eyebrow">404</p>
+      <h1 class="h1">Page <em>introuvable</em></h1>
+      <p class="lede nf__lead">Page not found · Страница не найдена</p>
+      <div class="actions">
+        <a class="btn btn--dark" href={ROUTES.home.fr}>Accueil</a>
+        <a class="link-arrow" href={ROUTES.home.en}>Home</a>
+        <a class="link-arrow" href={ROUTES.home.ru}>Главная</a>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .nf { min-height: 80vh; display: grid; place-items: center; padding-top: 8rem; }
+  .nf__lead { margin-top: 1.6rem; }
+</style>

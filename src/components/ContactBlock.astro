@@ -1,0 +1,89 @@
+---
+import Img from './Img.astro';
+import { UI, CONTACT, ROUTES, type Lang } from '../i18n';
+interface Props { lang: Lang; title?: string; lead?: string; headingLevel?: 'h1' | 'h2' }
+const { lang, title, lead, headingLevel = 'h2' } = Astro.props;
+const f = UI.form[lang];
+const H = headingLevel;
+const privacy = { fr: 'Politique de confidentialité', en: 'Privacy policy', ru: 'Политика конфиденциальности' }[lang];
+---
+<section class="section ct" id="contact">
+  <div class="wrap ct__grid">
+    <div class="ct__aside reveal">
+      <div class="media ratio-tall ct__img">
+        <Img base="202605-agence-chance-contacts" alt="Tatiana Chance — Agence Chance" sizes="(max-width: 860px) 100vw, 40vw" />
+      </div>
+      <div class="ct__direct">
+        <p class="eyebrow">{f.or}</p>
+        <a href={CONTACT.whatsapp} target="_blank" rel="noopener">WhatsApp</a>
+        <a href={CONTACT.telegram} target="_blank" rel="noopener">Telegram</a>
+        <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
+        <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+      </div>
+    </div>
+
+    <div class="ct__main reveal">
+      <p class="eyebrow eyebrow--rule">FR · RU · EN</p>
+      <H class="h2" set:html={title ?? f.title} />
+      <p class="ct__lead">{lead ?? f.lead}</p>
+
+      <form class="form" action="/api/contact.php" method="post" data-contact data-ok={f.ok} data-error={f.error} data-sending={f.sending}>
+        <input type="hidden" name="lang" value={lang} />
+        <div class="form__hp" aria-hidden="true">
+          <label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+        <div class="form__row">
+          <label class="field"><span>{f.name} *</span><input name="name" required autocomplete="name" maxlength="120" /></label>
+          <label class="field"><span>{f.email} *</span><input name="email" type="email" required autocomplete="email" maxlength="160" /></label>
+        </div>
+        <div class="form__row">
+          <label class="field"><span>{f.phone}</span><input name="phone" type="tel" autocomplete="tel" maxlength="40" /></label>
+          <label class="field"><span>{f.date}</span><input name="date" maxlength="60" /></label>
+        </div>
+        <div class="form__row">
+          <label class="field"><span>{f.guests}</span><input name="guests" inputmode="numeric" maxlength="20" /></label>
+          <label class="field"><span>{f.place}</span><input name="place" maxlength="120" /></label>
+        </div>
+        <label class="field"><span>{f.message}</span><textarea name="message" rows="4" maxlength="4000"></textarea></label>
+        <label class="check">
+          <input type="checkbox" name="consent" value="1" required />
+          <span>{f.consent} <a href={ROUTES.privacy[lang]}>{privacy}</a></span>
+        </label>
+        <div class="form__foot">
+          <button class="btn btn--plum" type="submit">{f.send}</button>
+          <p class="form__status" role="status" aria-live="polite" data-status></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ct__grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(3rem, 8vw, 8rem); align-items: start; }
+  .ct__direct { display: grid; gap: 0.4rem; margin-top: 2rem; font-size: 0.9rem; }
+  .ct__direct .eyebrow { margin-bottom: 0.8rem; }
+  .ct__direct a { width: fit-content; border-bottom: 1px solid transparent; transition: border-color .3s; }
+  .ct__direct a:hover { border-color: currentColor; }
+  .ct__lead { margin: 1.6rem 0 3rem; color: var(--ink-80); max-width: 32rem; }
+  .form { display: grid; gap: 1.6rem; }
+  .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+  .field { display: grid; gap: 0.4rem; }
+  .field span { font-size: 0.64rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--stone); }
+  .field input, .field textarea {
+    width: 100%; padding: 0.7rem 0; border: 0; border-bottom: 1px solid var(--hairline);
+    background: transparent; font: 300 1rem/1.5 var(--font-body); color: var(--ink); border-radius: 0;
+    transition: border-color .3s;
+  }
+  .field textarea { resize: vertical; }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--plum); }
+  .check { display: flex; gap: 0.8rem; align-items: flex-start; font-size: 0.8rem; color: var(--ink-80); }
+  .check input { margin-top: 0.3rem; accent-color: var(--plum); }
+  .check a { text-decoration: underline; text-underline-offset: 3px; }
+  .form__foot { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; margin-top: 0.6rem; }
+  .form__status { margin: 0; font-size: 0.86rem; }
+  .form__status[data-state='ok'] { color: #2f6b3a; }
+  .form__status[data-state='error'] { color: var(--plum); }
+  .form__hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  @media (max-width: 860px) { .ct__grid { grid-template-columns: 1fr; } .ct__img { aspect-ratio: 4 / 3; } }
+  @media (max-width: 560px) { .form__row { grid-template-columns: 1fr; } }
+</style>

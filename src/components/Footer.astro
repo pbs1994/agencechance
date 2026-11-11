@@ -1,0 +1,96 @@
+---
+import { ROUTES, UI, CONTACT, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const n = UI.nav[lang];
+const f = UI.footer[lang];
+const r = (k: keyof typeof ROUTES) => ROUTES[k][lang];
+const year = new Date().getFullYear();
+const cols = {
+  fr: { agency: 'Agence', services: 'Services', contact: 'Contact' },
+  en: { agency: 'Agency', services: 'Services', contact: 'Contact' },
+  ru: { agency: 'Агентство', services: 'Услуги', contact: 'Контакты' },
+}[lang];
+const svc = {
+  fr: [['planning', 'Organisation clé en main'], ['host', 'Maître de cérémonie'], ['coordination', 'Coordination du jour J'], ['vendors', 'Prestataires'], ['proposal', 'Demande en mariage'], ['forTwo', 'Mariage à deux']],
+  en: [['planning', 'Full planning'], ['host', 'Wedding host'], ['coordination', 'Day-of coordination'], ['vendors', 'Vendors'], ['proposal', 'Proposal in Paris'], ['forTwo', 'Wedding for two']],
+  ru: [['planning', 'Свадьба под ключ'], ['host', 'Ведущий'], ['coordination', 'Координация'], ['vendors', 'Подрядчики'], ['proposal', 'Предложение'], ['forTwo', 'Свадьба для двоих']],
+}[lang] as [keyof typeof ROUTES, string][];
+---
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__top">
+      <a href={r('home')} class="ftr__brand" aria-label="Agence Chance">
+        <img src="/brand/mark-plum.png" width="290" height="231" alt="" loading="lazy" />
+        <span>Agence Chance</span>
+      </a>
+      <p class="ftr__tagline">{f.tagline}<br /><em>Paris · Normandie · France</em></p>
+    </div>
+
+    <div class="ftr__grid">
+      <div>
+        <p class="ftr__h">{cols.agency}</p>
+        <ul>
+          <li><a href={r('about')}>{n.about}</a></li>
+          <li><a href={r('venues')}>{n.venues}</a></li>
+          <li><a href={r('portfolio')}>{n.portfolio}</a></li>
+          <li><a href={r('blog')}>{n.blog}</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ftr__h">{cols.services}</p>
+        <ul>{svc.map(([k, l]) => <li><a href={r(k)}>{l}</a></li>)}</ul>
+      </div>
+      <div>
+        <p class="ftr__h">{cols.contact}</p>
+        <ul>
+          <li><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></li>
+          <li><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></li>
+          <li>{CONTACT.address}</li>
+        </ul>
+      </div>
+      <div>
+        <p class="ftr__h">{f.follow}</p>
+        <ul>
+          <li><a href={CONTACT.instagram} target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href={CONTACT.whatsapp} target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href={CONTACT.telegram} target="_blank" rel="noopener">Telegram</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ftr__bottom">
+      <span>© {year} Agence Chance · {f.rights}</span>
+      <nav aria-label={f.legal}>
+        <a href={r('legal')}>{f.legal}</a>
+        <a href={r('privacy')}>{f.privacy}</a>
+        <a href={r('cookies')}>{f.cookies}</a>
+        <button type="button" data-consent-open>{lang === 'fr' ? 'Gérer les cookies' : lang === 'ru' ? 'Настройки cookies' : 'Cookie settings'}</button>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ftr { background: var(--ivory); padding: clamp(5rem, 10vw, 8rem) 0 2.5rem; font-size: 0.86rem; }
+  .ftr__top { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; flex-wrap: wrap; padding-bottom: 4rem; border-bottom: 1px solid var(--hairline); }
+  .ftr__brand { display: flex; align-items: center; gap: 1.2rem; }
+  .ftr__brand img { width: 4.2rem; height: auto; }
+  .ftr__brand span { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; }
+  .ftr__tagline { font-family: var(--font-display); font-size: 1.35rem; line-height: 1.4; text-align: right; margin: 0; }
+  .ftr__tagline em { color: var(--plum); }
+  .ftr__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5rem; padding: 3.5rem 0; }
+  .ftr__h { font-size: 0.66rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--stone); margin-bottom: 1.3rem; }
+  .ftr ul { list-style: none; display: grid; gap: 0.5rem; }
+  .ftr a { transition: color 0.3s; }
+  .ftr a:hover { color: var(--plum); }
+  .ftr__bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 2rem; border-top: 1px solid var(--hairline); font-size: 0.72rem; color: var(--stone); }
+  .ftr__bottom nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+  .ftr__bottom button { border: 0; padding: 0; background: none; font: inherit; color: inherit; cursor: pointer; }
+  .ftr__bottom button:hover { color: var(--plum); }
+  @media (max-width: 860px) {
+    .ftr__grid { grid-template-columns: 1fr 1fr; }
+    .ftr__tagline { text-align: left; }
+  }
+  @media (max-width: 480px) { .ftr__grid { grid-template-columns: 1fr; } }
+</style>

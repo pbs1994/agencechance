@@ -1,0 +1,414 @@
+---
+import Img from './Img.astro';
+import Reviews from './Reviews.astro';
+import ContactBlock from './ContactBlock.astro';
+import type { Block } from '../lib/blocks';
+import { src } from '../lib/media';
+import type { Lang } from '../i18n';
+
+interface Props { blocks: Block[]; lang: Lang }
+const { blocks, lang } = Astro.props;
+const tone = (t?: string) => (t ? `section--${t}` : '');
+const roman = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+const ytId = (u: string) => u.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/)?.[1] ?? '';
+const playLabel = { fr: 'Lire la vidéo', en: 'Play video', ru: 'Смотреть видео' }[lang];
+---
+{blocks.map((b) => {
+  switch (b.t) {
+    case 'intro':
+      return (
+        <section class:list={['section', tone(b.tone)]}>
+          <div class="wrap wrap--text center reveal">
+            <span class="ornament" aria-hidden="true"></span>
+            {b.eyebrow && <p class="eyebrow">{b.eyebrow}</p>}
+            {b.title && <h2 class="h2 blk-intro__title" set:html={b.title} />}
+            <div class="lede" set:html={b.text} />
+            {b.cta && <div class="actions"><a class="link-arrow" href={b.cta.href}>{b.cta.label}</a></div>}
+          </div>
+        </section>
+      );
+
+    case 'split':
+      return (
+        <section class:list={['section', tone(b.tone)]}>
+          <div class:list={['wrap', 'blk-split', { 'blk-split--rev': b.reverse }]}>
+            <figure class="blk-split__media">
+              <div class:list={['media', 'reveal-img', `ratio-${b.ratio ?? 'portrait'}`]}>
+                <Img base={b.image} alt={b.alt ?? ''} sizes="(max-width: 860px) 100vw, 50vw" position={b.position} />
+              </div>
+              {b.caption && <figcaption class="caption">{b.caption}</figcaption>}
+            </figure>
+            <div class="blk-split__text reveal">
+              {b.eyebrow && <p class="eyebrow eyebrow--rule">{b.eyebrow}</p>}
+              <h2 class="h2" set:html={b.title} />
+              <div class="blk-split__body">
+                {b.text?.map((p) => <p set:html={p} />)}
+                {b.list && <ul class="dash">{b.list.map((li) => <li set:html={li} />)}</ul>}
+              </div>
+              {b.cta && <div class="actions"><a class="link-arrow" href={b.cta.href}>{b.cta.label}</a></div>}
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'full':
+      return (
+        <section class="blk-full on-dark">
+          <div class="blk-full__media reveal-img"><Img base={b.image} alt={b.alt ?? ''} position={b.position} /></div>
+          {b.quote && (
+            <div class="blk-full__veil">
+              <blockquote class="wrap wrap--text center reveal">
+                <p set:html={b.quote} />
+                {b.cite && <cite>{b.cite}</cite>}
+              </blockquote>
+            </div>
+          )}
+        </section>
+      );
+
+    case 'features':
+      return (
+        <section class:list={['section', tone(b.tone)]}>
+          <div class="wrap">
+            <header class="blk-head reveal">
+              {b.eyebrow && <p class="eyebrow eyebrow--rule">{b.eyebrow}</p>}
+              <h2 class="h2" set:html={b.title} />
+              {b.lead && <p class="blk-head__lead">{b.lead}</p>}
+            </header>
+            <ol class="blk-features" style={`--cols:${b.items.length === 4 ? 4 : b.items.length === 2 ? 2 : 3}`}>
+              {b.items.map((it, i) => (
+                <li class="reveal" style={`transition-delay:${i * 90}ms`}>
+                  <span class="blk-features__num">{roman[i]}</span>
+                  <h3 class="h3" set:html={it.title} />
+                  <p set:html={it.text} />
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      );
+
+    case 'steps':
+      return (
+        <section class:list={['section', tone(b.tone)]}>
+          <div class="wrap blk-steps">
+            <header class="blk-steps__head reveal">
+              {b.eyebrow && <p class="eyebrow eyebrow--rule">{b.eyebrow}</p>}
+              <h2 class="h2" set:html={b.title} />
+              {b.lead && <p class="blk-head__lead">{b.lead}</p>}
+            </header>
+            <ol class="blk-steps__list">
+              {b.items.map((it, i) => (
+                <li class="reveal">
+                  <span class="blk-steps__num">{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <h3 class="h3" set:html={it.title} />
+                    <p set:html={it.text} />
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      );
+
+    case 'pricing':
+      return (
+        <section class="section section--ivory">
+          <div class="wrap blk-price">
+            <div class="blk-price__main reveal">
+              {b.eyebrow && <p class="eyebrow eyebrow--rule">{b.eyebrow}</p>}
+              <h2 class="h2" set:html={b.title} />
+              <p class="blk-price__value" set:html={b.price} />
+              {b.note && <p class="muted small">{b.note}</p>}
+              {b.text?.map((p) => <p set:html={p} />)}
+              {b.cta && <div class="actions"><a class="btn btn--dark" href={b.cta.href}>{b.cta.label}</a></div>}
+            </div>
+            <div class="blk-price__lists reveal">
+              {b.includes && (
+                <div>
+                  <p class="eyebrow">{b.includes.title}</p>
+                  <ul class="dash">{b.includes.items.map((li) => <li set:html={li} />)}</ul>
+                </div>
+              )}
+              {b.extras && (
+                <div>
+                  <p class="eyebrow">{b.extras.title}</p>
+                  <ul class="dash">{b.extras.items.map((li) => <li set:html={li} />)}</ul>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      );
+
+    case 'cards':
+      return (
+        <section class:list={['section', tone(b.tone)]} id={b.id}>
+          <div class="wrap">
+            {(b.title || b.eyebrow) && (
+              <header class="blk-head reveal">
+                {b.eyebrow && <p class="eyebrow eyebrow--rule">{b.eyebrow}</p>}
+                {b.title && <h2 class="h2" set:html={b.title} />}
+                {b.lead && <p class="blk-head__lead">{b.lead}</p>}
+              </header>
+            )}
+            <ul class:list={['blk-cards', `blk-cards--${b.layout ?? 'three'}`]}>
+              {b.items.map((c, i) => (
+                <li class="reveal" style={`transition-delay:${(i % 4) * 90}ms`}>
+                  <a href={c.href} class="blk-card">
+                    <div class="media media--zoom ratio-tall">
+                      <Img base={c.image} alt={c.title.replace(/<[^>]+>/g, '')} sizes="(max-width: 760px) 100vw, 33vw" />
+                    </div>
+                    {c.meta && <p class="blk-card__meta">{c.meta}</p>}
+                    <h3 class="h3" set:html={c.title} />
+                    {c.text && <p class="blk-card__text" set:html={c.text} />}
+                    {c.label && <span class="link-arrow">{c.label}</span>}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      );
+
+    case 'gallery':
+      return (
+        <section class="section">
+          <div class="wrap">
+            {(b.title || b.eyebrow) && (
+              <header class="blk-head center reveal">
+                {b.eyebrow && <p class="eyebrow eyebrow--rule">{b.eyebrow}</p>}
+                {b.title && <h2 class="h2" set:html={b.title} />}
+              </header>
+            )}
+            <div class="blk-gallery" data-gallery>
+              {b.images.map((img) => (
+                <a href={src(img, 1920)} class="blk-gallery__item reveal">
+                  <Img base={img} alt={b.alt ?? ''} sizes="(max-width: 760px) 50vw, 33vw" />
+                </a>
+              ))}
+            </div>
+            {b.credit && <p class="caption center">{b.credit}</p>}
+          </div>
+        </section>
+      );
+
+    case 'video':
+      return (
+        <section class="section section--ink on-dark">
+          <div class="wrap">
+            <header class="blk-head center reveal">
+              {b.eyebrow && <p class="eyebrow eyebrow--rule">{b.eyebrow}</p>}
+              <h2 class="h2" set:html={b.title} />
+            </header>
+            <div class="blk-video reveal">
+              <button class="blk-video__btn" type="button" data-yt={ytId(b.youtube)} aria-label={playLabel}>
+                <img src={b.poster ? src(b.poster, 1920) : `https://i.ytimg.com/vi/${ytId(b.youtube)}/maxresdefault.jpg`} alt="" loading="lazy" />
+                <span class="blk-video__play" aria-hidden="true"></span>
+              </button>
+            </div>
+            {b.credit && <p class="caption center">{b.credit}</p>}
+          </div>
+        </section>
+      );
+
+    case 'stats':
+      return (
+        <section class="section--tight blk-stats-wrap">
+          <ul class="wrap blk-stats">
+            {b.items.map((s) => (
+              <li class="reveal"><span class="blk-stats__value">{s.value}</span><span class="blk-stats__label">{s.label}</span></li>
+            ))}
+          </ul>
+        </section>
+      );
+
+    case 'quote':
+      return (
+        <section class="section">
+          <blockquote class="wrap wrap--text center blk-quote reveal">
+            <p set:html={b.text} />
+            {b.cite && <cite>{b.cite}</cite>}
+          </blockquote>
+        </section>
+      );
+
+    case 'cta':
+      return (
+        <section class="blk-cta on-dark">
+          <div class="blk-cta__media"><Img base={b.image} alt="" position={b.position} /></div>
+          <div class="blk-cta__veil"></div>
+          <div class="wrap wrap--text center blk-cta__body reveal">
+            {b.eyebrow && <p class="eyebrow eyebrow--rule">{b.eyebrow}</p>}
+            <h2 class="h1" set:html={b.title} />
+            {b.text && <p class="blk-cta__text">{b.text}</p>}
+            <div class="actions"><a class="btn btn--light" href={b.button.href}>{b.button.label}</a></div>
+          </div>
+        </section>
+      );
+
+    case 'contact':
+      return <ContactBlock lang={lang} title={b.title} lead={b.lead} />;
+
+    case 'reviews':
+      return <Reviews lang={lang} eyebrow={b.eyebrow} title={b.title} />;
+
+    case 'prose':
+      return (
+        <section class:list={['section', tone(b.tone)]}>
+          <div class="wrap wrap--text reveal">
+            {b.eyebrow && <p class="eyebrow eyebrow--rule">{b.eyebrow}</p>}
+            {b.title && <h2 class="h2 blk-prose__title" set:html={b.title} />}
+            <div class="prose" set:html={b.html} />
+          </div>
+        </section>
+      );
+  }
+})}
+
+
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-yt]').forEach((btn) =>
+    btn.addEventListener('click', () => {
+      const f = document.createElement('iframe');
+      f.src = `https://www.youtube-nocookie.com/embed/${btn.dataset.yt}?autoplay=1&rel=0`;
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.title = 'YouTube';
+      f.allowFullscreen = true;
+      btn.replaceWith(f);
+    }),
+  );
+</script>
+
+<style>
+  /* ---- shared ---- */
+  .blk-head { max-width: 46rem; margin-bottom: clamp(3rem, 6vw, 5rem); }
+  .blk-head.center { margin-inline: auto; }
+  .blk-head__lead { margin-top: 1.6rem; color: var(--ink-80); }
+  .section--ink .blk-head__lead { color: rgba(255,255,255,.8); }
+  :global(.dash) { list-style: none; display: grid; gap: 0.75rem; margin-top: 1.4rem; }
+  :global(.dash li) { position: relative; padding-left: 1.8rem; }
+  :global(.dash li)::before { content: ''; position: absolute; left: 0; top: 0.9em; width: 0.9rem; height: 1px; background: var(--plum); }
+  .blk-intro__title { margin-bottom: 2rem; }
+
+  /* ---- split ---- */
+  .blk-split { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 8vw, 8rem); align-items: center; }
+  .blk-split--rev .blk-split__media { order: 2; }
+  .blk-split__media { margin: 0; }
+  .blk-split__text { max-width: 32rem; }
+  .blk-split__body { margin-top: 2rem; color: var(--ink-80); }
+  .section--ink .blk-split__body { color: rgba(255,255,255,.82); }
+  @media (max-width: 860px) {
+    .blk-split { grid-template-columns: 1fr; }
+    .blk-split--rev .blk-split__media { order: 0; }
+  }
+
+  /* ---- full bleed ---- */
+  .blk-full { position: relative; height: 100vh; height: 100svh; min-height: 32rem; overflow: hidden; color: var(--paper); }
+  .blk-full__media { position: absolute; inset: 0; }
+  .blk-full__media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .blk-full__veil { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(20, 14, 18, 0.32); }
+  .blk-full blockquote { margin: 0; }
+  .blk-full blockquote p { font-family: var(--font-display); font-size: var(--fs-h2); font-weight: 300; line-height: 1.15; font-style: italic; }
+  .blk-full cite, .blk-quote cite { display: block; margin-top: 2rem; font-style: normal; font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.8; }
+
+  /* ---- features ---- */
+  .blk-features { list-style: none; display: grid; grid-template-columns: repeat(var(--cols, 3), 1fr); gap: 3.5rem clamp(2rem, 4vw, 3.5rem); }
+  .blk-features li { padding-top: 2.4rem; border-top: 1px solid var(--hairline); }
+  .blk-features__num { display: block; margin-bottom: 1.6rem; font-family: var(--font-display); font-style: italic; font-size: 1.4rem; color: var(--plum); }
+  .blk-features h3 { margin-bottom: 1rem; }
+  .blk-features p { color: var(--ink-80); font-size: 0.92rem; }
+  .section--ink .blk-features li { border-color: var(--hairline-light); }
+  .section--ink .blk-features p { color: rgba(255,255,255,.78); }
+  .section--ink .blk-features__num { color: #e9b7d2; }
+  @media (max-width: 960px) { .blk-features { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .blk-features { grid-template-columns: 1fr; gap: 2.4rem; } }
+
+  /* ---- steps ---- */
+  .blk-steps { display: grid; grid-template-columns: 1fr 1.4fr; gap: clamp(3rem, 8vw, 8rem); }
+  .blk-steps__head { position: sticky; top: 8rem; align-self: start; }
+  .blk-steps__list { list-style: none; border-top: 1px solid var(--hairline); }
+  .blk-steps__list li { display: grid; grid-template-columns: 4rem 1fr; gap: 1rem; padding: 2.4rem 0; border-bottom: 1px solid var(--hairline); }
+  .blk-steps__num { font-family: var(--font-display); font-size: 1.1rem; color: var(--plum); padding-top: 0.3rem; }
+  .blk-steps__list h3 { margin-bottom: 0.8rem; }
+  .blk-steps__list p { color: var(--ink-80); font-size: 0.94rem; }
+  @media (max-width: 860px) { .blk-steps { grid-template-columns: 1fr; } .blk-steps__head { position: static; } }
+
+  /* ---- pricing ---- */
+  .blk-price { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 8vw, 8rem); }
+  .blk-price__value { margin: 2.2rem 0 1rem; font-family: var(--font-display); font-size: clamp(2.6rem, 5vw, 4rem); line-height: 1; color: var(--plum); }
+  .blk-price__main > p:not(.eyebrow):not(.blk-price__value) { color: var(--ink-80); }
+  .blk-price__value :global(small) { font-size: 0.42em; color: var(--stone); font-style: italic; }
+  .blk-price__lists { display: grid; gap: 3rem; align-content: start; }
+  .blk-price__lists .dash { margin-top: 0; font-size: 0.92rem; }
+  @media (max-width: 860px) { .blk-price { grid-template-columns: 1fr; } }
+
+  /* ---- cards ---- */
+  .blk-cards { list-style: none; display: grid; gap: clamp(2.5rem, 4vw, 3.5rem) clamp(1.5rem, 3vw, 2.5rem); }
+  .blk-cards--three { grid-template-columns: repeat(3, 1fr); }
+  .blk-cards--two { grid-template-columns: repeat(2, 1fr); }
+  .blk-cards--four { grid-template-columns: repeat(4, 1fr); }
+  .blk-cards--three li:nth-child(3n + 2) { margin-top: 5rem; }
+  .blk-cards--four li:nth-child(even) { margin-top: 4rem; }
+  .blk-card { display: block; }
+  .blk-card .h3 { margin-top: 1.6rem; }
+  .blk-card__meta { margin: 1.4rem 0 -0.8rem; font-size: 0.66rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--stone); }
+  .blk-card__text { margin-top: 0.8rem; color: var(--ink-80); font-size: 0.9rem; }
+  .blk-card .link-arrow { margin-top: 1.2rem; }
+  @media (max-width: 960px) {
+    .blk-cards--three, .blk-cards--four { grid-template-columns: repeat(2, 1fr); }
+    .blk-cards--three li:nth-child(3n + 2) { margin-top: 0; }
+    .blk-cards--three li:nth-child(even), .blk-cards--four li:nth-child(even) { margin-top: 3rem; }
+  }
+  @media (max-width: 600px) {
+    .blk-cards--three, .blk-cards--two, .blk-cards--four { grid-template-columns: 1fr; }
+    .blk-cards li:nth-child(n) { margin-top: 0 !important; }
+  }
+
+  /* ---- gallery ---- */
+  .blk-gallery { columns: 3 18rem; column-gap: 1rem; }
+  .blk-gallery__item { display: block; margin-bottom: 1rem; break-inside: avoid; overflow: hidden; background: var(--sand); }
+  .blk-gallery__item :global(img) { width: 100%; height: auto; transition: transform 1.2s var(--ease), opacity 0.6s; }
+  .blk-gallery__item:hover :global(img) { transform: scale(1.03); }
+  @media (max-width: 600px) { .blk-gallery { columns: 2; column-gap: 0.5rem; } .blk-gallery__item { margin-bottom: 0.5rem; } }
+
+  /* ---- video ---- */
+  .blk-video { position: relative; aspect-ratio: 16 / 9; background: #000; }
+  .blk-video :global(iframe), .blk-video__btn { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .blk-video__btn { padding: 0; cursor: pointer; background: #000; }
+  .blk-video__btn img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: opacity 0.6s; }
+  .blk-video__btn:hover img { opacity: 1; }
+  .blk-video__play { position: absolute; left: 50%; top: 50%; width: 6rem; height: 6rem; transform: translate(-50%, -50%); border: 1px solid #fff; border-radius: 50%; }
+  .blk-video__play::after { content: ''; position: absolute; left: 54%; top: 50%; transform: translate(-50%, -50%); border-style: solid; border-width: 0.7rem 0 0.7rem 1.1rem; border-color: transparent transparent transparent #fff; }
+
+  /* ---- stats ---- */
+  .blk-stats-wrap { border-block: 1px solid var(--hairline); }
+  .blk-stats { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .blk-stats li { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 1rem; }
+  .blk-stats li + li { border-left: 1px solid var(--hairline); }
+  .blk-stats__value { font-family: var(--font-display); font-size: clamp(2.6rem, 5vw, 4.2rem); font-weight: 300; line-height: 1; color: var(--plum); }
+  .blk-stats__label { margin-top: 0.9rem; font-size: 0.66rem; letter-spacing: 0.26em; text-transform: uppercase; color: var(--stone); }
+  @media (max-width: 760px) {
+    .blk-stats { grid-template-columns: 1fr 1fr; row-gap: 2rem; }
+    .blk-stats li:nth-child(3) { border-left: 0; }
+  }
+
+  /* ---- quote ---- */
+  .blk-quote { margin: 0 auto; }
+  .blk-quote p { font-family: var(--font-display); font-size: var(--fs-h3); font-style: italic; line-height: 1.45; }
+  .blk-quote cite { color: var(--stone); }
+
+  /* ---- cta ---- */
+  .blk-cta { position: relative; min-height: 90vh; min-height: 90svh; display: grid; place-items: center; color: var(--paper); overflow: hidden; }
+  .blk-cta__media { position: absolute; inset: 0; }
+  .blk-cta__media :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .blk-cta__veil { position: absolute; inset: 0; background: rgba(20, 14, 18, 0.45); }
+  .blk-cta__body { position: relative; padding-block: 8rem; }
+  .blk-cta__text { margin-top: 1.8rem; color: rgba(255, 255, 255, 0.88); }
+
+  /* ---- prose ---- */
+  .blk-prose__title { margin-bottom: 2.4rem; }
+
+</style>
